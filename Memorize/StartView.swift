@@ -14,12 +14,18 @@ struct StartView: View {
     
     @State var showLoginView: Bool = true
     @State var isChoosingTheme: Bool = false
-    
+    @State var isLinkActive = false
+
+        
     var body: some View {
         NavigationView {
             VStack(alignment: .center) {
-                NavigationLink(destination: EmojiMemoryGameView(viewModel: EmojiMemoryGame())) {
-                    Button("New Game") {  }
+                let game = EmojiMemoryGame()
+                NavigationLink(destination: EmojiMemoryGameView(viewModel: game), isActive: $isLinkActive) {
+                    Button("New Game") {
+                        game.newGame()
+                        isLinkActive = true
+                    }
                 }.buttonStyle(MenuButtonStyle(with: settings.theme.accentColor))
                 Button("Choose theme") {
                     isChoosingTheme = true
