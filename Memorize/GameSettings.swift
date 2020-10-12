@@ -10,6 +10,8 @@ import Foundation
 
 class GameSettings: ObservableObject {
     
+    static var th: Themes = .sea
+        
     @Published var theme: Themes = .sea {
         didSet {
             print("Theme changed to \(theme)")

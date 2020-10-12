@@ -14,7 +14,7 @@ struct ThemeView: View {
     
     var themes = Themes.allCases
     
-    @State private var selectedThemeIndex = 0
+    @State private var selectedThemeIndex = Int(Themes.allCases.firstIndex(where: { $0 == GameSettings.th })!)
     
     init() {
         UITableView.appearance().backgroundColor = .clear
@@ -39,6 +39,7 @@ struct ThemeView: View {
     
     func onThemeChange(_ index: Int) {
         settings.theme = themes[index]
+        GameSettings.th = themes[index]
     }
 }
 

@@ -65,6 +65,6 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame()).environmentObject(GameSettings())
+        EmojiMemoryGameView(viewModel: EmojiMemoryGame())
     }
 }

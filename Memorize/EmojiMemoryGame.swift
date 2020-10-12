@@ -13,8 +13,9 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var model = EmojiMemoryGame.createMemoryGame()
     
     static func createMemoryGame() -> MemoryGame<String> {
-        let emojis: Array<String> = ["🐻", "🐼", "🐤", "🐷", "🐨"]
-        return MemoryGame<String>(numberOfPairsOfCards: 5) { index in
+        let theme = GameSettings.th
+        let emojis: Array<String> = theme.emojiSet
+        return MemoryGame<String>(theme: theme, numberOfPairsOfCards: 5) { index in
             emojis[index]
         }
     }
