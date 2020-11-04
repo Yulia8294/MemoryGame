@@ -12,7 +12,7 @@ class EmojiMemoryGame: ObservableObject {
     
     @Published private var model = EmojiMemoryGame.createMemoryGame()
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         let theme = GameSettings.th
         let emojis: Array<String> = theme.emojiSet
         return MemoryGame<String>(theme: theme, numberOfPairsOfCards: 5) { index in
