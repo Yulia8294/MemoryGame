@@ -35,19 +35,7 @@ extension Binding {
     }
 }
 
-struct NavigationConfigurator: UIViewControllerRepresentable {
-    var configure: (UINavigationController) -> Void = { _ in }
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
-        UIViewController()
-    }
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
-        if let nc = uiViewController.navigationController {
-            self.configure(nc)
-        }
-    }
-
-}
 
 extension UIColor {
     
@@ -56,15 +44,15 @@ extension UIColor {
         var green1: CGFloat = 0
         var blue1: CGFloat = 0
         var alpha1: CGFloat = 0
-
+        
         var red2: CGFloat = 0
         var green2: CGFloat = 0
         var blue2: CGFloat = 0
         var alpha2: CGFloat = 0
-
+        
         getRed(&red1, green: &green1, blue: &blue1, alpha: &alpha1)
         color.getRed(&red2, green: &green2, blue: &blue2, alpha: &alpha2)
-
+        
         return UIColor(
             red: red1 * (1.0 - amount) + red2 * amount,
             green: green1 * (1.0 - amount) + green2 * amount,
@@ -72,6 +60,24 @@ extension UIColor {
             alpha: alpha1
         )
     }
+    
+    var lighterColor: UIColor {
+        return lighterColor(removeSaturation: 0.5, resultAlpha: -1)
+    }
+    
+    func lighterColor(removeSaturation val: CGFloat, resultAlpha alpha: CGFloat) -> UIColor {
+        var h: CGFloat = 0, s: CGFloat = 0
+        var b: CGFloat = 0, a: CGFloat = 0
+        
+        guard getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+        else {return self}
+        
+        return UIColor(hue: h,
+                       saturation: max(s - val, 0.0),
+                       brightness: b,
+                       alpha: alpha == -1 ? a : alpha)
+    }
+    
 }
 
 
